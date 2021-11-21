@@ -1,0 +1,41 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Registro de empleados</h6>
+    </div>
+    <div class="card-body">
+      <form  [formGroup]="group">
+        <div class="form-row">
+          <div class="col-6">
+              <label for="identificacion">Identificacion</label>
+              <input type="text" class="form-control" id="identificacion" placeholder="Identificacion" formControlName="identificacion">
+            </div>
+          <div class="col-6">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre">
+          </div>
+      </div>
+      <div class="form-row mt-3">
+          <div class="col-6">
+              <label for="email">Correo</label>
+              <input type="email" class="form-control" id="inputEmail" placeholder="Correo" formControlName="correo">
+            </div>
+            <div class="col-6">
+              <label for="rol">Rol</label>
+              <select class="form-control" id="rol" formControlName="rol">
+                  <option>Seleccione..</option>
+                  <option value="1">Empleado</option>
+              </select>
+            </div>
+      </div>
+      <div class="form-row mt-3">
+            <div class="col-6">
+              <label for="telefono">Telefono</label>
+              <input type="tel" class="form-control" id="telefono" placeholder="Telefono" formControlName="telefono">
+            </div>
+      </div>
+      <div class="mt-4">
+        <button type="button" class="btn btn-primary" (click)='crearEmpleadoSubmit()'>Enviar</button>
+      </div>
+      </form>
+    </div>
+</div>

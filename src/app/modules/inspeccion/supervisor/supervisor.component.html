@@ -1,0 +1,44 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Registro de Supervisores</h6>
+  </div>
+  <div class="card-body">
+    <form  [formGroup]="group">
+    <div class="form-row">
+      <div class="col-6">
+        <label for="identificacion">Identificacion <span class="red-requerido">*</span></label>
+        <input type="text" class="form-control" id="identificacion" placeholder="Identificacion" formControlName="identificacion">
+      </div>
+      <div class="col-6">
+        <label for="nombre">Nombre <span class="red-requerido">*</span></label>
+        <input type="text" class="form-control" id="nombre" placeholder="Nombre" formControlName="nombre">
+      </div>
+    </div>
+
+    <div class="form-row mt-3">
+      <div class="col-6">
+        <label for="email">Correo <span class="red-requerido">*</span></label>
+        <input type="email" class="form-control" id="correo" placeholder="Correo" formControlName="correo">
+      </div>
+      <div class="col-6">
+        <label for="telefono">Telefono</label>
+        <input type="tel" class="form-control" id="telefo" placeholder="Telefono" formControlName="telefono">
+      </div>
+    </div>
+    
+    <div class="form-row mt-3">
+      <div class="col-6">
+        <label for="usuario">Usaurio <span class="red-requerido">*</span></label>
+        <input type="text" class="form-control" id="usurio" placeholder="usuario" formControlName="usuario">
+      </div>
+      <div class="col-6">
+        <label for="paswword">Password <span class="red-requerido">*</span></label>
+        <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+      </div>
+    </div>
+    <div class="mt-4">
+      <button type="button" class="btn btn-primary" (click)='crearSupervisorSubmit()'>Enviar</button>
+    </div>
+  </form>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Registro de Inspecciones</h6>
+  </div>
+  <div class="card-body">
+    <form  [formGroup]="group">
+      <div class="form-row">
+        <div class="col-6">
+          <label for="CodigoSupervisor">Supervisor <span class="red-requerido">*</span></label>
+          <select id="CodigoSupervisor" class="form-control" formControlName="CodigoSupervisor">
+            <option>Seleccione..</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="CodigoEmpleado">Locacion <span class="red-requerido">*</span></label>
+          <select id="CodigoEmpleado" class="form-control" formControlName="CodigoLocacion">
+            <option>Seleccione..</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row mt-2">
+        <div class="col-6">
+          <label for="CodigoEmpleado">Empleado <span class="red-requerido">*</span></label>
+          <select id="CodigoEmpleado" class="form-control" formControlName="CodigoEmpleado">
+            <option>Seleccione..</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="Tipo">Tipo <span class="red-requerido">*</span></label>
+          <select id="Tipo" class="form-control" formControlName="Tipo">
+            <option>Seleccione..</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-row mt-2">
+        <div class="col-6">
+          <label for="Fecha">Fecha <span class="red-requerido">*</span></label>
+            <input type="date" class="form-control" id="Fecha" placeholder="Fecha" formControlName="Fecha">
+        </div>
+        <div class="col-6">
+          <label for="Titulo">Titulo <span class="red-requerido">*</span></label>
+          <input type="text" class="form-control" id="inputTitulo" placeholder="Titulo" formControlName="Titulo">
+        </div>
+      </div>
+  
+      <div class="form-row mt-2">
+        <div class="col-12">
+          <label for="Descripcion">Descripcion <span class="red-requerido">*</span></label>
+          <textarea class="form-control" id="Descripcion" formControlName="Descripcion">
+  
+          </textarea>
+        </div>
+      </div>
+      <div class="form-row mt-2">
+        <div class="col-6">
+          <label for="Aprobado">Aprobado</label>
+          <select id="Aprobado" class="form-control" formControlName="Aprobado">
+            <option value="">Seleccione..</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="novedad">Novedad</label>
+          <select id="SelectNovedad" class="form-control" formControlName="Novedad">
+            <option value="">Seleccione..</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+      </div>
+      </div>
+  
+      <div class="form-row mt-2">
+        <div class="col-12">
+          <label for="decripcionNovedad">Descripcion Novedad</label>
+          <textarea class="form-control" id="DescripcionNovedad" formControlName="DescripcionNovedad">
+  
+          </textarea>
+        </div>
+      </div>
+  
+      <div class="form-row mt-2">
+        <div class="col-6">
+          <label for="AccionMejora">Accion Mejora</label>
+          <select id="AccionMejora" class="form-control" formControlName="AccionMejora">
+            <option value="">Seleccione..</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="DescripcionAccionMejora">Descripcion Acccion</label>
+          <textarea class="form-control" id="DescripcionAccionMejora" formControlName="DescripcionAccionMejora">
+          </textarea>
+      </div>
+      </div>
+  
+      <div class="form-row mt-2">
+        <div class="col-12">
+          <label for="comentario">Comentario</label>
+          <textarea class="form-control" id="Comentario" formControlName="Comentario">
+          </textarea>
+      </div>
+      </div>
+      <div class="mt-4">
+        <button type="button" class="btn btn-primary" (click)="crearInspeccionSubmit()">Enviar</button>
+      </div>
+    </form>
+  </div>
+</div>
