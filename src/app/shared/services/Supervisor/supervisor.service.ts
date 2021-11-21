@@ -11,7 +11,12 @@ export class SupervisorService {
   }
 
   CrearSupervisor(object : any){
-    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const headers = new Headers();
+
+    headers.set('Content-Type', 'application/json');
+    headers.set('Accept', 'application/json');
+    headers.append('X-RqUID', '122');
+    console.log(headers);
     return this.api.post("Supervisor",object,  { headers: headers });
    }
 

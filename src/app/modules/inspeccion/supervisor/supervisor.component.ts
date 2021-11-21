@@ -29,16 +29,24 @@ export class SupervisorComponent implements OnInit {
 
   crearSupervisorSubmit(){
     console.log(this.group.valid);
-      if (this.group.valid)
+      if (this.group.value)
       {
+        let supervisor = 
+        {
+          identificacion: this.group.value.identificacion,
+          nombre: this.group.value.nombre,
+          correo: this.group.value.correo,
+          usuario: this.group.value.usuario,
+          telefono: this.group.value.telefono,
+          password: this.group.value.password
+        }
 
-        console.log(this.group.value);
-      
-      //   this.usuariosService.CrearEmpleado(usuario).subscribe((data: any) =>
-      //   {
+        console.log(supervisor);
+        this.supervisorService.CrearSupervisor(supervisor).subscribe((data: any) =>
+        {
        
-      //    this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
-      //  });
+         this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
+       });
 
       }else
       {

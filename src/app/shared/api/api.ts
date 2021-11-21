@@ -9,7 +9,7 @@ export class Api {
   url: string = '';
 
   constructor(public http: HttpClient) {
-      this.url='localhost:5002/c3p/v1/Portal/';
+      this.url='http://127.0.0.1:5001/c3p/v1/Portal/';
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
