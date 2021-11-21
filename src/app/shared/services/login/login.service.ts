@@ -17,7 +17,7 @@ export class LoginService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', '122');
-    return this.api.post("/Supervisor/Autenticacion",object,  { headers: headers });
+    return this.api.post("/Supervisor/Autenticacion",object,  { headers: headers },'5001');
    }
 
 }

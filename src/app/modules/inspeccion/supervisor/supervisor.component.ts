@@ -43,7 +43,6 @@ export class SupervisorComponent implements OnInit {
 
         this.supervisorService.CrearSupervisor(supervisor).subscribe((data: any) =>
         {
-          console.log(data);
           if (data == null)
           {
             this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             

@@ -9,6 +9,7 @@ export class SupervisorService {
 
   constructor(private http: HttpClient,
     private api: Api) {
+      api.puerto ='5001';
   }
 
   CrearSupervisor(object : any){
@@ -18,7 +19,7 @@ export class SupervisorService {
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', '122');
     console.log(headers);
-    return this.api.post("Supervisor",object,  { headers: headers });
+    return this.api.post("Supervisor",object,  { headers: headers },'5001');
    }
 
    GetSupervisor(object : any){

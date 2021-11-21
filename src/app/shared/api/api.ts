@@ -6,13 +6,14 @@ import { Injectable, Inject } from '@angular/core';
  */
 @Injectable()
 export class Api {
-  url: string = '';
+  private url: string = '';
+  public puerto: string = '';
 
   constructor(public http: HttpClient) {
-      this.url='http://127.0.0.1:5001/c3p/v1/Portal/';
   }
 
-  get(endpoint: string, params?: any, reqOpts?: any) {
+  get(endpoint: string, params?: any, reqOpts?: any, puertoP?:any) {
+    this.url='http://127.0.0.1:'+puertoP+'/c3p/v1/Portal/';
     if (!reqOpts) {
       reqOpts = {
           params: new HttpParams(),
@@ -32,7 +33,8 @@ export class Api {
     return this.http.get(this.url + endpoint, reqOpts);
   }
 
-  post(endpoint: string, body: any, reqOpts?: any) {
+  post(endpoint: string, body: any, reqOpts?: any, puertoP?:any) {
+    this.url='http://127.0.0.1:'+puertoP+'/c3p/v1/Portal/';
     return this.http.post(this.url + endpoint, body, reqOpts);
   }
 

@@ -18,11 +18,11 @@ export class EmpleadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.group = this.formBuilder.group({
-      identificacion: new FormControl('', Validators.required),
-      nombre: new FormControl('', Validators.required),
-      correo: new FormControl('', Validators.required),
-      rol: new FormControl(''),
-      telefono: new FormControl('')
+      Identificacion: new FormControl('', Validators.required),
+      Nombre: new FormControl('', Validators.required),
+      Correo: new FormControl('', Validators.required),
+      Rol: new FormControl(''),
+      Telefono: new FormControl('')
     });
   }
 
@@ -31,13 +31,26 @@ export class EmpleadosComponent implements OnInit {
       if (this.group.valid)
       {
 
-        console.log(this.group.value);
+        let usuario = 
+        {
+          Identificacion: this.group.value.Identificacion,
+          Nombre: this.group.value.Nombre,
+          Correo: this.group.value.Correo,
+          Rol: this.group.value.Rol,
+          Telefono: this.group.value.Telefono,
+        }
       
-      //   this.usuariosService.CrearEmpleado(usuario).subscribe((data: any) =>
-      //   {
+        this.usuariosService.CrearEmpleado(usuario).subscribe((data: any) =>
+        {
        
-      //    this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
-      //  });
+          if(data == null)
+          {
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+          }else 
+          {
+            this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
+           } 
+       });
 
       }else
       {

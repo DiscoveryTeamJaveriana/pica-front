@@ -17,13 +17,13 @@ export class LocacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.group = this.formBuilder.group({
-      nombre: new FormControl('', Validators.required),
-      direccion: new FormControl('',Validators.required),
-      barrio: new FormControl('',Validators.required),
-      sector: new FormControl('',Validators.required),
-      representante: new FormControl('',Validators.required),
-      correo: new FormControl('',Validators.required),
-      telefono: new FormControl('')
+      Nombre: new FormControl('', Validators.required),
+      Direccion: new FormControl('',Validators.required),
+      Barrio: new FormControl('',Validators.required),
+      Sector: new FormControl('',Validators.required),
+      Representante: new FormControl('',Validators.required),
+      Correo: new FormControl('',Validators.required),
+      Telefono: new FormControl('')
     });
   }
 
@@ -31,14 +31,24 @@ export class LocacionComponent implements OnInit {
     console.log(this.group.valid);
       if (this.group.valid)
       {
+        let locacion = 
+        {
+          Nombre: this.group.value.Nombre,
+          Direccion: this.group.value.Direccion,
+          Barrio: this.group.value.Barrio,
+          Sector:this.group.value.Sector,
+          Representante:this.group.value.Representante,
+          Correo: this.group.value.Correo, 
+          Telefono: this.group.value.Telefono
+        }
 
         console.log(this.group.value);
       
-      //   this.usuariosService.CrearEmpleado(usuario).subscribe((data: any) =>
-      //   {
+        this.locacionesService.CrearSupervisor(locacion).subscribe((data: any) =>
+        {
        
-      //    this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
-      //  });
+         this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
+       });
 
       }else
       {
