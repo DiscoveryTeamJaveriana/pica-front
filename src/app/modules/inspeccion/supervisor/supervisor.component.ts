@@ -41,11 +41,17 @@ export class SupervisorComponent implements OnInit {
           password: this.group.value.password
         }
 
-        console.log(supervisor);
         this.supervisorService.CrearSupervisor(supervisor).subscribe((data: any) =>
         {
-       
-         this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
+          console.log(data);
+          if (data == null)
+          {
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+          }else 
+          {
+            this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
+           } 
+         
        });
 
       }else

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Api } from '../../api/api';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +12,11 @@ export class SupervisorService {
   }
 
   CrearSupervisor(object : any){
-    const headers = new Headers();
+    let headers = new HttpHeaders();
 
-    headers.set('Content-Type', 'application/json');
-    headers.set('Accept', 'application/json');
-    headers.append('X-RqUID', '122');
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('X-RqUID', '122');
     console.log(headers);
     return this.api.post("Supervisor",object,  { headers: headers });
    }
