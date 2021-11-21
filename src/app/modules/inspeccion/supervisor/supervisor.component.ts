@@ -33,12 +33,12 @@ export class SupervisorComponent implements OnInit {
       {
         let supervisor = 
         {
-          identificacion: this.group.value.identificacion,
-          nombre: this.group.value.nombre,
-          correo: this.group.value.correo,
-          usuario: this.group.value.usuario,
-          telefono: this.group.value.telefono,
-          password: this.group.value.password
+          Identificacion: this.group.value.identificacion,
+          Nombre: this.group.value.nombre,
+          Correo: this.group.value.correo,
+          Usuario: this.group.value.usuario,
+          Telefono: this.group.value.telefono,
+          Clave: this.group.value.password
         }
 
         this.supervisorService.CrearSupervisor(supervisor).subscribe((data: any) =>

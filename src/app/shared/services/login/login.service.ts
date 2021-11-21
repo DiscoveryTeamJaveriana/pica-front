@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Api } from '../../api/api';
 
 @Injectable({
@@ -13,8 +13,11 @@ export class LoginService {
 
   
   Login(object : any){
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    return this.api.post("Empleados",object,  { headers: headers });
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('X-RqUID', '122');
+    return this.api.post("/Supervisor/Autenticacion",object,  { headers: headers });
    }
 
 }
