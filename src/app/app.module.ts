@@ -15,6 +15,8 @@ import { BienvenidosComponent } from './modules/bienvenidos/bienvenidos.componen
 import { LoginComponent } from './modules/login/login.component';
 import { EmpleadosComponent } from './modules/empleados/empleados.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
+    ChartsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
