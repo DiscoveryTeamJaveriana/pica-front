@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { EmpleadosService } from 'src/app/shared/services/empleados/empleados.service';
 import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspecciones.service';
+import { LocacionesService } from 'src/app/shared/services/locacion/locaciones.service';
 
 @Component({
   selector: 'app-crear-inspeccion',
@@ -11,10 +13,14 @@ import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspec
 export class CrearInspeccionComponent implements OnInit {
 
   public group: any;
-  
+  public LisLocaciones : any [] = [];
+  public LisEmpleados : any [] = [];
+
   constructor(private formBuilder: FormBuilder,
     private inspeccionesService: InspeccionesService,
-    private toastr:ToastrService) { }
+    private toastr:ToastrService,
+    private locacionesService: LocacionesService,
+    private empleadosService: EmpleadosService) { }
 
   ngOnInit(): void {
     this.group = this.formBuilder.group({
@@ -25,6 +31,7 @@ export class CrearInspeccionComponent implements OnInit {
       Titulo: new FormControl('',Validators.required),
       Tipo: new FormControl('',Validators.required),
       Descripcion: new FormControl('',Validators.required),
+
       Aprobado: new FormControl(''),
       Novedad: new FormControl(''),
       DescripcionNovedad: new FormControl(''),
@@ -32,25 +39,63 @@ export class CrearInspeccionComponent implements OnInit {
       DescripcionAccionMejora: new FormControl(''),
       Comentario: new FormControl('')
     });
+    this.getLocaciones();
+    this.getEmpleado();
+    let IdSupervisor = localStorage.getItem("id");  
+    this.group.controls['CodigoSupervisor'].value =IdSupervisor;
   }
 
   crearInspeccionSubmit(){
-    console.log(this.group.valid);
+    console.log(this.group.value);
       if (this.group.valid)
       {
-
-        console.log(this.group.value);
+        var Aprobado = (this.group.value.Aprobado =="true");
+        var Novedad = (this.group.value.Novedad=="true");
+        let Inspeccion = 
+        {
+          CodigoSupervisor:this.group.value.CodigoSupervisor,
+          CodigoLocacion:this.group.value.CodigoLocacion,
+          CodigoEmpleado:this.group.value.CodigoEmpleado,
+          Fecha:this.group.value.Fecha,
+          Titulo:this.group.value.Titulo,
+          Tipo:this.group.value.Tipo,
+          Descripcion: this.group.value.Descripcion,
+          Aprobado: Aprobado,
+          Novedad: Novedad,
+          DescripcionNovedad:this.group.value.DescripcionNovedad,
+          AccionMejora:this.group.value.AccionMejora,
+          DescripcionAccionMejora:this.group.value.DescripcionAccionMejora,
+          Comentario:this.group.value.Comentario
+        }
       
-      //   this.usuariosService.CrearEmpleado(usuario).subscribe((data: any) =>
-      //   {
+        this.inspeccionesService.CrearSupervision(Inspeccion).subscribe((data: any) =>
+        {
        
-      //    this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
-      //  });
+          if(data == null)
+          {
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+          }else 
+          {
+            this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
+           } 
+       });
 
       }else
       {
         this.toastr.warning('por favor valide los campos obligatorios del formulario!', 'Mensaje de notifcación!'); 
       }
     }
-
+   getLocaciones()
+   {
+    this.locacionesService.GetLocacacion().subscribe((data: any) => {
+      this.LisLocaciones = data;
+    });  
+   }
+   getEmpleado()
+   {
+    this.empleadosService.GetEmpleado().subscribe((data: any) => {
+      this.LisEmpleados = data;
+      console.log(this.LisEmpleados);
+    });  
+   }
 }

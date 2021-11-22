@@ -10,6 +10,11 @@ export class BienvenidosComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+    if (IsAutenticado == null) 
+    {
+       document.location.href = '/';
+    }
   }
 
 }

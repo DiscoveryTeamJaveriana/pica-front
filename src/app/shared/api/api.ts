@@ -14,12 +14,16 @@ export class Api {
 
   get(endpoint: string, params?: any, reqOpts?: any, puertoP?:any) {
     this.url='http://127.0.0.1:'+puertoP+'/c3p/v1/Portal/';
+    let RqUID = Math.floor(Math.random() * 100) + 1;
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Accept', 'application/json');
+    headers = headers.append('X-RqUID', RqUID.toString());
+
     if (!reqOpts) {
       reqOpts = {
           params: new HttpParams(),
-            header: new HttpHeaders({
-                'Content-Type': 'application/json'
-              })
+            header:headers
       };
     }
     // Support easy query params for GET requests
@@ -30,11 +34,14 @@ export class Api {
       }
     }
 
-    return this.http.get(this.url + endpoint, reqOpts);
+    console.log(reqOpts);
+    let options = { headers: headers };
+    return this.http.get(this.url + endpoint, options);
   }
 
   post(endpoint: string, body: any, reqOpts?: any, puertoP?:any) {
     this.url='http://127.0.0.1:'+puertoP+'/c3p/v1/Portal/';
+    
     return this.http.post(this.url + endpoint, body, reqOpts);
   }
 

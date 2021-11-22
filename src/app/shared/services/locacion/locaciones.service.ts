@@ -11,15 +11,16 @@ export class LocacionesService {
     private api: Api) {
   }
 
-  CrearSupervisor(object : any){
+  CrearLocacion(object : any){
     let headers = new HttpHeaders();
+    let RqUID = Math.floor(Math.random() * 100) + 1;
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
-    headers = headers.append('X-RqUID', '122');
+    headers = headers.append('X-RqUID', RqUID.toString());
     return this.api.post("Locacion",object,  { headers: headers },'5003');
    }
 
-   GetSupervisor(object : any){
-    return this.api.get('Locacion/'+ object,'5003');
+   GetLocacacion(){
+    return this.api.get('Locaciones','','','5003');
    }
 }

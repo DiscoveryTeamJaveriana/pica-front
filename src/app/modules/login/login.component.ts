@@ -11,7 +11,7 @@ import { LoginService } from 'src/app/shared/services/login/login.service';
 export class LoginComponent implements OnInit {
   public group: any;
 
-  public isAutenticado:boolean = false;
+  public isAutenticado:boolean = true;
 
   constructor(private formBuilder: FormBuilder,
     private toastr:ToastrService,
@@ -23,6 +23,15 @@ export class LoginComponent implements OnInit {
       usuario: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+    console.log("IsAutenticado"+IsAutenticado)
+    if (IsAutenticado != null) 
+    {
+       document.location.href = '/bienvenido';
+    }else
+    {
+      this.isAutenticado = false;
+    }
   }
 
   loginSubmit(){
@@ -37,9 +46,12 @@ export class LoginComponent implements OnInit {
         this.loginService.Login(usuario).subscribe((data: any) =>
         {
           console.log(data);
-          if (data == null)
+          if (data.Id != null)
           {
-            localStorage.setItem("IsAutenticado","Si");           
+            localStorage.setItem("IsAutenticado","Si");  
+            localStorage.setItem("usuario",data.Nombre);  
+            localStorage.setItem("id",data.Id);  
+            document.location.href = '/bienvenido';     
           }else 
           {
             this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
@@ -51,5 +63,15 @@ export class LoginComponent implements OnInit {
         this.toastr.warning('por favor valide los campos obligatorios del formulario!', 'Mensaje de notifcación!'); 
       }
   }
+ 
+  isAutenticadoFun()
+  {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
 
+    if (IsAutenticado != null) 
+    {
+      this.isAutenticado = true;
+      document.location.href = '/bienvenido'; 
+    }  
+  }
 }

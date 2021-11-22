@@ -14,15 +14,11 @@ export class SupervisorService {
 
   CrearSupervisor(object : any){
     let headers = new HttpHeaders();
-
+    let RqUID = Math.floor(Math.random() * 100) + 1;
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
-    headers = headers.append('X-RqUID', '122');
+    headers = headers.append('X-RqUID', RqUID.toString());
     console.log(headers);
     return this.api.post("Supervisor",object,  { headers: headers },'5001');
-   }
-
-   GetSupervisor(object : any){
-    return this.api.get('Supervisor/'+ object);
    }
 }

@@ -7,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  public isAutenticado:boolean = true;
+  public isAutenticado:boolean = false;
   constructor() { }
 
   ngOnInit(): void {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    if (IsAutenticado != null) 
+    {
+      this.isAutenticado = true;
+    }else
+    {
+      this.isAutenticado = false;
+    }
   }
 
 }

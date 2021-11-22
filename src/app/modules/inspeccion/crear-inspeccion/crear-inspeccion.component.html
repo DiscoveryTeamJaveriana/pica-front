@@ -7,14 +7,13 @@
       <div class="form-row">
         <div class="col-6">
           <label for="CodigoSupervisor">Supervisor <span class="red-requerido">*</span></label>
-          <select id="CodigoSupervisor" class="form-control" formControlName="CodigoSupervisor">
-            <option>Seleccione..</option>
-          </select>
+          <input id="CodigoSupervisor" class="form-control" formControlName="CodigoSupervisor" [readonly]="true"/>
         </div>
         <div class="col-6">
           <label for="CodigoEmpleado">Locacion <span class="red-requerido">*</span></label>
           <select id="CodigoEmpleado" class="form-control" formControlName="CodigoLocacion">
-            <option>Seleccione..</option>
+            <option value="">Seleccione..</option>
+            <option [value]="item.Codigo" *ngFor="let item of LisLocaciones">{{item.Nombre}}</option>
           </select>
         </div>
       </div>
@@ -22,13 +21,17 @@
         <div class="col-6">
           <label for="CodigoEmpleado">Empleado <span class="red-requerido">*</span></label>
           <select id="CodigoEmpleado" class="form-control" formControlName="CodigoEmpleado">
-            <option>Seleccione..</option>
+            <option value="">Seleccione..</option>
+            <option [value]="item.Codigo" *ngFor="let item of LisEmpleados">{{item.Nombre}}</option>
           </select>
         </div>
         <div class="col-6">
           <label for="Tipo">Tipo <span class="red-requerido">*</span></label>
           <select id="Tipo" class="form-control" formControlName="Tipo">
-            <option>Seleccione..</option>
+            <option value="">Seleccione..</option>
+            <option value="Jardineria">Jardineria</option>
+            <option value="Zonas Comunes">Zonas Comunes</option>
+            <option value="Arreglos Locativos">Arreglos Locativos</option>
           </select>
         </div>
       </div>

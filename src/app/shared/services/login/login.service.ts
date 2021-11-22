@@ -14,10 +14,11 @@ export class LoginService {
   
   Login(object : any){
     let headers = new HttpHeaders();
+    let RqUID = Math.floor(Math.random() * 100) + 1;
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
-    headers = headers.append('X-RqUID', '122');
-    return this.api.post("/Supervisor/Autenticacion",object,  { headers: headers },'5001');
+    headers = headers.append('X-RqUID', RqUID.toString());
+    return this.api.post("Supervisor/Autenticacion",object,  { headers: headers },'5001');
    }
 
 }

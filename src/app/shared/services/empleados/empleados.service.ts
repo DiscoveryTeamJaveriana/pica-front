@@ -13,14 +13,15 @@ export class EmpleadosService {
   }
 
   CrearEmpleado(object : any){
+    let RqUID = Math.floor(Math.random() * 100) + 1;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
-    headers = headers.append('X-RqUID', '122');
+    headers = headers.append('X-RqUID', RqUID.toString());
     return this.api.post("Empleado",object,  { headers: headers },'5002');
    }
 
-   GetEmpleado(object : any){
-    return this.api.get('Empleado'+ object);
+   GetEmpleado(){
+    return this.api.get('Empleados','','','5002');
    }
 }

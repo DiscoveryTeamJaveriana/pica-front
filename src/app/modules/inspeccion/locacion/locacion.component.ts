@@ -44,10 +44,16 @@ export class LocacionComponent implements OnInit {
 
         console.log(this.group.value);
       
-        this.locacionesService.CrearSupervisor(locacion).subscribe((data: any) =>
+        this.locacionesService.CrearLocacion(locacion).subscribe((data: any) =>
         {
        
-         this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
+          if(data == null)
+          {
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+          }else 
+          {
+            this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
+           } 
        });
 
       }else
