@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip,Color } from 'ng2-charts';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
 import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspecciones.service';
 
 
@@ -11,57 +11,76 @@ import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspec
 })
 export class BienvenidosComponent {
 
-  public isAutenticado:boolean = false;
-  
-  public LisSupervisiones : any [] = [];
+  public isAutenticado: boolean = false;
+
+  public LisSupervisiones: any[] = [];
+  public Listipos: any[] = [];
+
   barChartOptions: ChartOptions = {
     responsive: true,
   };
   barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
-  barChartPlugins:any = {'backgroundColor': [
-    "#FF6384",
- "#4BC0C0",
- "#FFCE56",
- "#E7E9ED",
- "#36A2EB"
- ]};
+  barChartPlugins: any = {
+    'backgroundColor': [
+      "#FF6384",
+      "#4BC0C0",
+      "#FFCE56",
+      "#E7E9ED",
+      "#36A2EB"
+    ]
+  };
 
- public barChartColors: Color[] = [
-  { backgroundColor: '#4e73df' },
-]
+  public barChartColors: Color[] = [
+    { backgroundColor: '#ea4335' },
+  ]
 
-barChartData: ChartDataSets[] = [
-  { data: [1, 1, 1, 20], label: 'Task Status' }
-];
- 
-  constructor(private inspeccionesService:InspeccionesService)
-   {
+  barChartData: ChartDataSets[] = [
+    { data: [1, 1, 1, 20], label: 'Vistas por fecha' }
+  ];
+
+  constructor(private inspeccionesService: InspeccionesService) {
     this.getInspecciones();
-   }
+  }
 
   ngOnInit(): void {
     let IsAutenticado = localStorage.getItem("IsAutenticado");
 
-    // if (IsAutenticado != null) 
-    // {
-    //   this.isAutenticado = true;
-    // }else
-    // {
-    //   this.isAutenticado = false;
-    //   document.location.href = '/';  
-    // }
-
-    
+    if (IsAutenticado != null) 
+    {
+      this.isAutenticado = true;
+    }else
+    {
+      this.isAutenticado = false;
+      document.location.href = '/';  
+    }
   }
 
-  getInspecciones(){
+  getInspecciones() {
     this.inspeccionesService.GetHistoricos().subscribe((data: any) => {
-      this.LisSupervisiones = data;
-      console.log(data);
-      this.barChartLabels = this.LisSupervisiones.map(item => item.Fecha).
-      filter((value, index, self) => self.indexOf(value) === index);
-    });  
+      
+      this.LisSupervisiones = data.map((x: any) => x.Fecha);
+      this.Listipos  = data.map((x: any) => x.Tipo);
+      console.log(this.Listipos);
+
+      let unicos = this.LisSupervisiones.reduce((accArr, valor) => {
+        if (!accArr.some((date: {date: string; count: number}) => date.date === valor)) {
+          accArr.push({
+            date: valor,
+            count: this.LisSupervisiones.filter((date: string) => date === valor).length
+          });
+        }
+        return accArr;
+      },[]);
+      
+      let fechas = unicos.map((t:any)=> t.date);
+      let Count = unicos.map((t:any)=> t.count);
+      this.barChartLabels = fechas;
+      this.barChartData[0].data = Count
+      this.barChartData[0].data?.push(1);
+      this.barChartData[0].data?.push(20);
+
+    });
   }
 }

@@ -16,6 +16,15 @@ export class LocacionComponent implements OnInit {
     private toastr:ToastrService) { }
 
   ngOnInit(): void {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    if (IsAutenticado != null) 
+    {
+    }else
+    {
+      document.location.href = '/';  
+    }
+
     this.group = this.formBuilder.group({
       Nombre: new FormControl('', Validators.required),
       Direccion: new FormControl('',Validators.required),
@@ -28,7 +37,6 @@ export class LocacionComponent implements OnInit {
   }
 
   crearLocacionSubmit(){
-    console.log(this.group.valid);
       if (this.group.valid)
       {
         let locacion = 

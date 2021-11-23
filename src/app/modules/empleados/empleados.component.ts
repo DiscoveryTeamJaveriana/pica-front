@@ -17,6 +17,16 @@ export class EmpleadosComponent implements OnInit {
   public group: any;
 
   ngOnInit(): void {
+
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    if (IsAutenticado != null) 
+    {
+    }else
+    {
+      document.location.href = '/';  
+    }
+
     this.group = this.formBuilder.group({
       Identificacion: new FormControl('', Validators.required),
       Nombre: new FormControl('', Validators.required),

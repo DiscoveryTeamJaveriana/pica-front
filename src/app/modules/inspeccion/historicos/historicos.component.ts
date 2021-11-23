@@ -13,11 +13,21 @@ export class HistoricosComponent implements OnInit {
 
    public  lishistoricos : any [] =[];
   ngOnInit(): void {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    if (IsAutenticado != null) 
+    {
+    }else
+    {
+      document.location.href = '/';  
+    }
+
     this.getInspecciones();
   }
 
   getInspecciones(){
-    this.inspeccionesService.GetHistoricosByFiltro("Supervisor","76c8aa18-3df1-43de-9d3f-784141e0c7b2").subscribe((data: any) => {
+    let IsAutenticado = localStorage.getItem("id");
+    this.inspeccionesService.GetHistoricosByFiltro("Supervisor",IsAutenticado).subscribe((data: any) => {
       this.lishistoricos = data;
       console.log(data);
     });  
