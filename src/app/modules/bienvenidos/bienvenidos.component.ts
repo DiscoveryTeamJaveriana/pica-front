@@ -62,7 +62,7 @@ export class BienvenidosComponent {
       
       this.LisSupervisiones = data.map((x: any) => x.Fecha);
       this.Listipos  = data.map((x: any) => x.Tipo);
-      console.log(this.Listipos);
+      
 
       let unicos = this.LisSupervisiones.reduce((accArr, valor) => {
         if (!accArr.some((date: {date: string; count: number}) => date.date === valor)) {
@@ -73,7 +73,20 @@ export class BienvenidosComponent {
         }
         return accArr;
       },[]);
+
+
+      let unicosTipo = this.Listipos.reduce((accArr2, valor2) => {
+        if (!accArr2.some((date: {tipo: string; count: number}) => date.tipo === valor2)) {
+          accArr2.push({
+            tipo: valor2,
+            count: this.Listipos.filter((tipo: string) => tipo === valor2).length
+          });
+        }
+        return accArr2;
+      },[]);
       
+      console.log(unicosTipo);
+
       let fechas = unicos.map((t:any)=> t.date);
       let Count = unicos.map((t:any)=> t.count);
       this.barChartLabels = fechas;
