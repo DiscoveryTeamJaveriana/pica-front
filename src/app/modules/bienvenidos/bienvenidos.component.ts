@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip,Color } from 'ng2-charts';
+import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspecciones.service';
+
 
 @Component({
   selector: 'app-bienvenidos',
@@ -9,21 +11,57 @@ import { Label } from 'ng2-charts';
 })
 export class BienvenidosComponent {
 
-  public barChartOptions: ChartOptions = {
+  public isAutenticado:boolean = false;
+  
+  public LisSupervisiones : any [] = [];
+  barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [];
+  barChartLabels: Label[] = [];
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins:any = {'backgroundColor': [
+    "#FF6384",
+ "#4BC0C0",
+ "#FFCE56",
+ "#E7E9ED",
+ "#36A2EB"
+ ]};
 
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
+ public barChartColors: Color[] = [
+  { backgroundColor: '#4e73df' },
+]
 
-  constructor() { }
+barChartData: ChartDataSets[] = [
+  { data: [1, 1, 1, 20], label: 'Task Status' }
+];
+ 
+  constructor(private inspeccionesService:InspeccionesService)
+   {
+    this.getInspecciones();
+   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    // if (IsAutenticado != null) 
+    // {
+    //   this.isAutenticado = true;
+    // }else
+    // {
+    //   this.isAutenticado = false;
+    //   document.location.href = '/';  
+    // }
+
+    
+  }
+
+  getInspecciones(){
+    this.inspeccionesService.GetHistoricos().subscribe((data: any) => {
+      this.LisSupervisiones = data;
+      console.log(data);
+      this.barChartLabels = this.LisSupervisiones.map(item => item.Fecha).
+      filter((value, index, self) => self.indexOf(value) === index);
+    });  
   }
 }

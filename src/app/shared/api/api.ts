@@ -34,7 +34,7 @@ export class Api {
       }
     }
 
-    console.log(reqOpts);
+    console.log(this.url);
     let options = { headers: headers };
     return this.http.get(this.url + endpoint, options);
   }

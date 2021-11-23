@@ -1,1 +1,35 @@
-<p>historicos works!</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Historico de supervisones</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Descripcion</th>
+                        <th scope="col">Aprobado</th>
+                        <th scope="col">Novedad</th>
+                        <th scope="col">Descripcion Novedad</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of lishistoricos;">
+                    <tr>
+                        <td>{{item.Tipo}}</td>
+                        <td>{{item.Fecha}}</td>
+                        <td>{{item.Titulo}}</td>
+                        <td>{{item.Descripcion}}</td>
+                        <td *ngIf="item.Aprobado === true">SI</td>
+                        <td *ngIf="item.Aprobado === false">NO</td>
+                        <td *ngIf="item.Novedad === true">SI</td>
+                        <td *ngIf="item.Novedad === false">NO</td>
+                        <td>{{item.DescripcionAccionMejora}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

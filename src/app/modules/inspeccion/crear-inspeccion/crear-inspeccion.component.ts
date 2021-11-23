@@ -68,7 +68,7 @@ export class CrearInspeccionComponent implements OnInit {
           Comentario:this.group.value.Comentario
         }
       
-        this.inspeccionesService.CrearSupervision(Inspeccion).subscribe((data: any) =>
+        this.inspeccionesService.CrearInspecciones(Inspeccion).subscribe((data: any) =>
         {
        
           if(data == null)
