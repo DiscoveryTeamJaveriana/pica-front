@@ -19,7 +19,7 @@ export class InspeccionesService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', RqUID.toString());
-    return this.api.post("Inspeccion",object,  { headers: headers },'5005');
+    return this.api.post("Inspeccion",object,  { headers: headers },'pica-inspection');
    }
 
    GetHistoricos()
@@ -32,7 +32,7 @@ export class InspeccionesService {
     headers = headers.append("FechaInicio",'2021-11-11');
     headers = headers.append("FechaFin", '2021-11-30');
 
-    return this.http.get("http://127.0.0.1:5004/c3p/v1/Portal/Historico/Fecha",{headers: headers});
+    return this.http.get("http://zuul-proxy:7777/pica-historic/c3p/v1/Portal/Historico/Fecha",{headers: headers});
    }
    GetHistoricosByFiltro(tipo:any,identificador:any)
    {
@@ -42,7 +42,7 @@ export class InspeccionesService {
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', RqUID.toString());
     headers = headers.append("TipoConsulta",tipo);
-    return this.http.get("http://127.0.0.1:5004/c3p/v1/Portal/Historico/"+identificador,{headers: headers});
+    return this.http.get("http://zuul-proxy:7777/pica-historic/c3p/v1/Portal/Historico/"+identificador,{headers: headers});
    }
 
 
@@ -51,7 +51,7 @@ export class InspeccionesService {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
-    return this.http.post("http://localhost:10074/api/Notification/email",reciever,{headers: headers});
+    return this.http.post("http://pica-notification:10074/api/Notification/email",reciever,{headers: headers});
    }
 
 }

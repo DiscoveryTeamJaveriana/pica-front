@@ -19,6 +19,6 @@ export class SupervisorService {
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', RqUID.toString());
     console.log(headers);
-    return this.api.post("Supervisor",object,  { headers: headers },'5001');
+    return this.api.post("Supervisor",object,  { headers: headers },'pica-supervisor');
    }
 }

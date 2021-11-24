@@ -17,10 +17,10 @@ export class LocacionesService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', RqUID.toString());
-    return this.api.post("Locacion",object,  { headers: headers },'5003');
+    return this.api.post("Locacion",object,  { headers: headers },'pica-location');
    }
 
    GetLocacacion(){
-    return this.api.get('Locaciones','','','5003');
+    return this.api.get('Locaciones','','','pica-location');
    }
 }

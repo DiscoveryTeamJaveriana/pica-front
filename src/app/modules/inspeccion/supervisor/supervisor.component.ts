@@ -17,16 +17,6 @@ export class SupervisorComponent implements OnInit {
     private toastr:ToastrService) { }
 
   ngOnInit(): void {
-
-    let IsAutenticado = localStorage.getItem("IsAutenticado");
-
-    if (IsAutenticado != null) 
-    {
-    }else
-    {
-      document.location.href = '/';  
-    }
-    
     this.group = this.formBuilder.group({
       identificacion: new FormControl('', Validators.required),
       nombre: new FormControl('', Validators.required),

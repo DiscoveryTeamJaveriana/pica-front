@@ -18,10 +18,10 @@ export class EmpleadosService {
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', RqUID.toString());
-    return this.api.post("Empleado",object,  { headers: headers },'5002');
+    return this.api.post("Empleado",object,  { headers: headers },'pica-employee');
    }
 
    GetEmpleado(){
-    return this.api.get('Empleados','','','5002');
+    return this.api.get('Empleados','','','pica-employee');
    }
 }
