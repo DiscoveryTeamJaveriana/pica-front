@@ -57,7 +57,8 @@ export class LocacionComponent implements OnInit {
        
           if(data == null)
           {
-            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!'); 
+            this.group.reset();            
           }else 
           {
             this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 

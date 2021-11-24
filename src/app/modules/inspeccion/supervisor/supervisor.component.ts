@@ -17,6 +17,15 @@ export class SupervisorComponent implements OnInit {
     private toastr:ToastrService) { }
 
   ngOnInit(): void {
+
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    if (IsAutenticado != null) 
+    {
+    }else
+    {
+      document.location.href = '/';  
+    }
     
     this.group = this.formBuilder.group({
       identificacion: new FormControl('', Validators.required),
@@ -48,7 +57,8 @@ export class SupervisorComponent implements OnInit {
         {
           if (data == null)
           {
-            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!'); 
+            this.group.reset();            
           }else 
           {
             this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 

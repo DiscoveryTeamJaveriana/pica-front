@@ -23,6 +23,14 @@ export class CrearInspeccionComponent implements OnInit {
     private empleadosService: EmpleadosService) { }
 
   ngOnInit(): void {
+    let IsAutenticado = localStorage.getItem("IsAutenticado");
+
+    if (IsAutenticado != null) 
+    {
+    }else
+    {
+      document.location.href = '/';  
+    }
     this.group = this.formBuilder.group({
       CodigoSupervisor: new FormControl('', Validators.required),
       CodigoLocacion: new FormControl('',Validators.required),
@@ -74,14 +82,14 @@ export class CrearInspeccionComponent implements OnInit {
           if(data == null)
           {
             this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
+
             let reciever = localStorage.getItem("Correo"); 
             let correo = 
             {
               reciever :reciever
             }
-            this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>
-            {
-            }); 
+            this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>{ }); 
+            this.group.reset();
 
           }else 
           {
