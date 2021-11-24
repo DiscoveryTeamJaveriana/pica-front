@@ -42,8 +42,16 @@ export class InspeccionesService {
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('X-RqUID', RqUID.toString());
     headers = headers.append("TipoConsulta",tipo);
-
     return this.http.get("http://127.0.0.1:5004/c3p/v1/Portal/Historico/"+identificador,{headers: headers});
+   }
+
+
+   EnviarCorreo(reciever:any)
+   {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Accept', 'application/json');
+    return this.http.post("http://localhost:10074/api/Notification/email",reciever,{headers: headers});
    }
 
 }

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("IsAutenticado","Si");  
             localStorage.setItem("usuario",data.Nombre);  
             localStorage.setItem("id",data.Id);  
+            localStorage.setItem("Correo",data.Correo);  
             document.location.href = '/bienvenido';     
           }else 
           {

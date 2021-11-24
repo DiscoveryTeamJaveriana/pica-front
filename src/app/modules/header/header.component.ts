@@ -21,5 +21,9 @@ export class HeaderComponent implements OnInit {
       this.isAutenticado = false;
     }
   }
-
+  cerrarsesion()
+  {
+    localStorage.clear();
+    window.location.href ="/";
+  }
 }

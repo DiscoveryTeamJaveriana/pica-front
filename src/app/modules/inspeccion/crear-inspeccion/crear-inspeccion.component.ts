@@ -73,7 +73,16 @@ export class CrearInspeccionComponent implements OnInit {
        
           if(data == null)
           {
-            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');             
+            this.toastr.success('Proceso de registro existos', 'Mensaje de notifcación!');
+            let reciever = localStorage.getItem("Correo"); 
+            let correo = 
+            {
+              reciever :reciever
+            }
+            this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>
+            {
+            }); 
+
           }else 
           {
             this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 

@@ -26,7 +26,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
         </div>
         <div class="card-body">
-              
+            <canvas baseChart 
+            [data]="doughnutChartData" 
+            [labels]="doughnutChartLabels" 
+            [chartType]="doughnutChartType">
+            </canvas>
         </div>
     </div>
 </div>

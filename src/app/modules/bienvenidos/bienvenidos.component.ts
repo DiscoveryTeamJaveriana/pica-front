@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color } from 'ng2-charts';
+import { SingleDataSet, Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, Color, MultiDataSet } from 'ng2-charts';
 import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspecciones.service';
 
 
@@ -12,7 +12,6 @@ import { InspeccionesService } from 'src/app/shared/services/Inspecciones/inspec
 export class BienvenidosComponent {
 
   public isAutenticado: boolean = false;
-
   public LisSupervisiones: any[] = [];
   public Listipos: any[] = [];
 
@@ -37,8 +36,11 @@ export class BienvenidosComponent {
   ]
 
   barChartData: ChartDataSets[] = [
-    { data: [1, 1, 1, 20], label: 'Vistas por fecha' }
+    { data: [], label: 'Vistas por fecha' }
   ];
+  doughnutChartLabels: Label[] =[];
+  doughnutChartData: MultiDataSet = [[53, 30, 17]];
+  doughnutChartType: ChartType = 'doughnut';
 
   constructor(private inspeccionesService: InspeccionesService) {
     this.getInspecciones();
@@ -62,38 +64,48 @@ export class BienvenidosComponent {
       
       this.LisSupervisiones = data.map((x: any) => x.Fecha);
       this.Listipos  = data.map((x: any) => x.Tipo);
+      this.graficarBarras(this.LisSupervisiones);    
+      this.graficaTortas(this.Listipos);    
+
+
       
-
-      let unicos = this.LisSupervisiones.reduce((accArr, valor) => {
-        if (!accArr.some((date: {date: string; count: number}) => date.date === valor)) {
-          accArr.push({
-            date: valor,
-            count: this.LisSupervisiones.filter((date: string) => date === valor).length
-          });
-        }
-        return accArr;
-      },[]);
-
-
-      let unicosTipo = this.Listipos.reduce((accArr2, valor2) => {
-        if (!accArr2.some((date: {tipo: string; count: number}) => date.tipo === valor2)) {
-          accArr2.push({
-            tipo: valor2,
-            count: this.Listipos.filter((tipo: string) => tipo === valor2).length
-          });
-        }
-        return accArr2;
-      },[]);
-      
-      console.log(unicosTipo);
-
-      let fechas = unicos.map((t:any)=> t.date);
-      let Count = unicos.map((t:any)=> t.count);
-      this.barChartLabels = fechas;
-      this.barChartData[0].data = Count
-      this.barChartData[0].data?.push(1);
-      this.barChartData[0].data?.push(20);
 
     });
+  }
+
+  graficarBarras(informacion:any)
+  {
+    let unicos = this.LisSupervisiones.reduce((accArr, valor) => {
+      if (!accArr.some((date: {date: string; count: number}) => date.date === valor)) {
+        accArr.push({
+          date: valor,
+          count: this.LisSupervisiones.filter((date: string) => date === valor).length
+        });
+      }
+      return accArr;
+    },[]);
+    let fechas = unicos.map((t:any)=> t.date);
+    let Count = unicos.map((t:any)=> t.count);
+    let maximo = Math.max(Count);
+    this.barChartLabels = fechas;
+    this.barChartData[0].data = Count
+    this.barChartData[0].data?.push(1);
+    this.barChartData[0].data?.push(maximo);
+  }
+
+  graficaTortas(informacion:any)
+  {
+    let unicosTipo = this.Listipos.reduce((accArr2, valor2) => {
+      if (!accArr2.some((date: {tipo: string; count: number}) => date.tipo === valor2)) {
+        accArr2.push({
+          tipo: valor2,
+          count: this.Listipos.filter((tipo: string) => tipo === valor2).length
+        });
+      }
+      return accArr2;
+    },[]);
+    this.doughnutChartLabels = unicosTipo.map((t:any)=> t.tipo);
+    this.doughnutChartData = unicosTipo.map((t:any)=> t.count);
+    console.log(this.doughnutChartData);
   }
 }
