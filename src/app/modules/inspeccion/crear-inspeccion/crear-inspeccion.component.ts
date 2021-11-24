@@ -49,19 +49,20 @@ export class CrearInspeccionComponent implements OnInit {
     });
     this.getLocaciones();
     this.getEmpleado();
-    let IdSupervisor = localStorage.getItem("id");  
-    this.group.controls['CodigoSupervisor'].value =IdSupervisor;
+    
+    let usuario = localStorage.getItem("usuario");  
+    this.group.controls['CodigoSupervisor'].value =usuario;
   }
 
   crearInspeccionSubmit(){
-    console.log(this.group.value);
+    let IdSupervisor = localStorage.getItem("id");
       if (this.group.valid)
       {
         var Aprobado = (this.group.value.Aprobado =="true");
         var Novedad = (this.group.value.Novedad=="true");
         let Inspeccion = 
         {
-          CodigoSupervisor:this.group.value.CodigoSupervisor,
+          CodigoSupervisor: IdSupervisor,
           CodigoLocacion:this.group.value.CodigoLocacion,
           CodigoEmpleado:this.group.value.CodigoEmpleado,
           Fecha:this.group.value.Fecha,
@@ -89,7 +90,7 @@ export class CrearInspeccionComponent implements OnInit {
               reciever :reciever
             }
             this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>{ }); 
-            this.group.reset();
+            // this.group.reset();
 
           }else 
           {
