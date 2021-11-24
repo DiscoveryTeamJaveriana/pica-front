@@ -13,8 +13,7 @@ COPY ./ /usr/local/app/
 RUN npm install --force
 
 # Generate the build of the application
-RUN npm run build
-
+RUN npm run build --prod
 
 # Stage 2: Serve app with nginx server
 
@@ -23,3 +22,4 @@ FROM nginx:latest
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /usr/local/app/dist/ProyectoPica /usr/share/nginx/html
+COPY --from=build /usr/local/app/nginx-default-docker.conf /etc/nginx/conf.d/default.conf

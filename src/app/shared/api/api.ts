@@ -13,7 +13,7 @@ export class Api {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any, puertoP?:any) {
-    this.url='http://zuul-proxy:7777/'+puertoP+'/c3p/v1/Portal/';
+    this.url='http://'+window.location.host+'/zuul-proxy/'+puertoP+'/c3p/v1/Portal/';
     let RqUID = Math.floor(Math.random() * 100) + 1;
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -41,7 +41,7 @@ export class Api {
 
   post(endpoint: string, body: any, reqOpts?: any, puertoP?:any) 
   {
-    this.url='http://zuul-proxy:7777/'+puertoP+'/c3p/v1/Portal/';
+    this.url='http://'+window.location.host+'/zuul-proxy/'+puertoP+'/c3p/v1/Portal/';
     
     return this.http.post(this.url + endpoint, body, reqOpts);
   }
