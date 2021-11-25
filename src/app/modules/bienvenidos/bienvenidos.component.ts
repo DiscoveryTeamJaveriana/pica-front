@@ -85,13 +85,16 @@ export class BienvenidosComponent {
       return accArr;
     },[]);
     console.log('unicos'+unicos);
-    let fechas = unicos.map((t:any)=> t.date);
-    let Count = unicos.map((t:any)=> t.count);
-    let maximo = Math.max(Count);
-    this.barChartLabels = fechas;
-    this.barChartData[0].data = Count
-    this.barChartData[0].data?.push(1);
-    this.barChartData[0].data?.push(maximo);
+    if(!unicos.length)
+    {
+      let fechas = unicos.map((t:any)=> t.date);
+      let Count = unicos.map((t:any)=> t.count);
+      let maximo = Math.max(Count);
+      this.barChartLabels = fechas;
+      this.barChartData[0].data = Count
+      this.barChartData[0].data?.push(1);
+      this.barChartData[0].data?.push(maximo);
+    }
   }
 
   graficaTortas(informacion:any)
