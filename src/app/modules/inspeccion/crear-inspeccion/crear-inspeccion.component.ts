@@ -89,9 +89,15 @@ export class CrearInspeccionComponent implements OnInit {
             {
               reciever :reciever
             }
-            this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>{ }); 
+            this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>
+            {
+              if(data.statusCode == "1")
+              {
+                  window.location.href="/bienvenido";
+              };
+             }); 
             // this.group.reset();
-            window.location.href="/bienvenido"
+            
           }else 
           {
             this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
