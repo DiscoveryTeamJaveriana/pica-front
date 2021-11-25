@@ -38,6 +38,8 @@ export class BienvenidosComponent {
   barChartData: ChartDataSets[] = [
     { data: [], label: 'Vistas por fecha' }
   ];
+
+
   doughnutChartLabels: Label[] =[];
   doughnutChartData: MultiDataSet = [[53, 30, 17]];
   doughnutChartType: ChartType = 'doughnut';
@@ -65,11 +67,7 @@ export class BienvenidosComponent {
       this.LisSupervisiones = data.map((x: any) => x.Fecha);
       this.Listipos  = data.map((x: any) => x.Tipo);
       this.graficarBarras(this.LisSupervisiones);    
-      this.graficaTortas(this.Listipos);    
-
-
-      
-
+      this.graficaTortas(this.Listipos);   
     });
   }
 
@@ -85,7 +83,7 @@ export class BienvenidosComponent {
       return accArr;
     },[]);
     console.log('unicos'+unicos);
-    if(!unicos.length)
+    if(unicos.length > 0)
     {
       let fechas = unicos.map((t:any)=> t.date);
       let Count = unicos.map((t:any)=> t.count);
@@ -110,6 +108,5 @@ export class BienvenidosComponent {
     },[]);
     this.doughnutChartLabels = unicosTipo.map((t:any)=> t.tipo);
     this.doughnutChartData = unicosTipo.map((t:any)=> t.count);
-    console.log(this.doughnutChartData);
   }
 }
