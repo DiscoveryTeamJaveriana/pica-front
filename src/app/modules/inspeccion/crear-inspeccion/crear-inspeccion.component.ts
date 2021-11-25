@@ -91,7 +91,7 @@ export class CrearInspeccionComponent implements OnInit {
             }
             this.inspeccionesService.EnviarCorreo(correo).subscribe((data: any) =>{ }); 
             // this.group.reset();
-
+            window.location.href="/bienvenido"
           }else 
           {
             this.toastr.warning(data.Mensaje, 'Mensaje de notifcación!'); 
